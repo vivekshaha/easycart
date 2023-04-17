@@ -40,9 +40,9 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col mt-">
+      <div className="flex flex-col ">
         <Navbar total={totalCount} />
-        <div className="px-8 max-w-7xl bg-gray-light">
+        <div className="px-8 max-w-7xl bg-gray-light grow">
           <Routes>
             <Route index element={<ProductList />} />
             <Route

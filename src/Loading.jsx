@@ -3,8 +3,8 @@ import { ImSpinner9 } from "react-icons/im";
 
 const Loading = () => {
   return (
-    <div>
-      <ImSpinner9 className="animate-spin" />
+    <div className="flex items-center justify-center grow">
+      <ImSpinner9 className="text-6xl animate-spin text-primary" />
     </div>
   );
 };

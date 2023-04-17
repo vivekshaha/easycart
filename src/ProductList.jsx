@@ -49,7 +49,7 @@ function ProductList() {
 
   return (
     <>
-      <div className="px-24 py-20 my-16 bg-white grow">
+      <div className="px-24 py-20 my-16 bg-white ">
         <div className="flex justify-end mb-8">
           <input
             className="w-56 p-2 ml-2 border border-black border-solid focus:outline-none"
