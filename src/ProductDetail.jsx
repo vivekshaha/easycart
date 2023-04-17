@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getProductDetail } from "./https";
 import NotFound from "./NotFound";
+import Loading from "./Loading";
 const ProductDetail = ({ cartDetail }) => {
   const id = +useParams().id;
   const [loading, setLoading] = useState(true);
@@ -34,13 +35,15 @@ const ProductDetail = ({ cartDetail }) => {
   if (loading) {
     return (
       <>
-        <div>loading</div>
+        <div className="flex items-center justify-center grow">
+          <Loading />
+        </div>
       </>
     );
   }
 
   return (
-    <>
+    <div className="grow">
       {product ? (
         <>
           <Link to="/">Back to Home</Link>
@@ -59,13 +62,24 @@ const ProductDetail = ({ cartDetail }) => {
             </button>
           )}
 
-          {id > 1 && <Link to={"/products/" + (id - 1)}>back</Link>}
-          <Link to={"/products/" + (id + 1)}>forward</Link>
+          {id > 1 && (
+            <Link
+              to={"/products/" + (id - 1)}
+              onClick={() => {
+                setLoading(true);
+              }}
+            >
+              back
+            </Link>
+          )}
+          <Link to={"/products/" + (id + 1)} onClick={() => setCount(true)}>
+            forward
+          </Link>
         </>
       ) : (
         <NotFound />
       )}
-    </>
+    </div>
   );
 };
 

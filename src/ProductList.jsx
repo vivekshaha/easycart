@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ProjectDetail from "./Product";
 import { getProducts } from "./https";
 import NoMatching from "./NoMatching";
+import Loading from "./Loading";
 
 function ProductList() {
   const [query, setQuery] = useState("");
@@ -43,34 +44,36 @@ function ProductList() {
   }
 
   if (loading) {
-    return <div>loading</div>;
+    return <Loading />;
   }
 
   return (
     <>
-      <input
-        type="text"
-        value={query}
-        className="border-4 "
-        placeholder="enter you serch"
-        onChange={updatequery}
-      />
-      <select value={sort} onChange={updatesort}>
-        <option value="default">Default short</option>
-        <option value="priceasc">Price:Low to High</option>
-        <option value="pricedsc">Price:High to low</option>
-        <option value="title">shot by title</option>
-      </select>
-      <div className="grid grid-cols-3">
-        {Products.map((product) => (
-          <ProjectDetail key={product.id} {...product} />
-        ))}
+      <div className="grow">
+        <input
+          type="text"
+          value={query}
+          className="border-4 "
+          placeholder="enter you serch"
+          onChange={updatequery}
+        />
+        <select value={sort} onChange={updatesort}>
+          <option value="default">Default short</option>
+          <option value="priceasc">Price:Low to High</option>
+          <option value="pricedsc">Price:High to low</option>
+          <option value="title">shot by title</option>
+        </select>
+        <div className="grid grid-cols-3">
+          {Products.map((product) => (
+            <ProjectDetail key={product.id} {...product} />
+          ))}
+        </div>
+        {Products.length == 0 && (
+          <NoMatching>
+            Pls serch for another keyworid their is no matching
+          </NoMatching>
+        )}
       </div>
-      {Products.length == 0 && (
-        <NoMatching>
-          Pls serch for another keyworid their is no matching
-        </NoMatching>
-      )}
     </>
   );
 }

@@ -7,6 +7,7 @@ import ProductList from "./ProductList";
 import { Route, Routes, useParams } from "react-router-dom";
 import ProductDetail from "./ProductDetail";
 import NotFound from "./NotFound";
+import { getProductDetail } from "./https";
 
 function App() {
   const localdata = localStorage.getItem("cart");
@@ -28,19 +29,30 @@ function App() {
   const totalCount = Object.keys(cart).reduce((sum, Pid) => {
     return sum + cart[Pid];
   }, 0);
+  const promises = Object.keys(cart).map((a) => {
+    return getProductDetail(a);
+  });
+  const cartData = Promise.all(promises);
+  //ti is todo higherer
+  cartData.then((a) => {
+    console.log(a);
+  });
 
   return (
     <>
-      <Navbar total={totalCount} />
-      <Routes>
-        <Route index element={<ProductList />} />
-        <Route
-          path="/products/:id"
-          element={<ProductDetail cartDetail={cartDetail} />}
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
+      {" "}
+      <div className="flex flex-col">
+        <Navbar total={totalCount} />
+        <Routes>
+          <Route index element={<ProductList />} />
+          <Route
+            path="/products/:id"
+            element={<ProductDetail cartDetail={cartDetail} />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </div>
     </>
   );
 }
