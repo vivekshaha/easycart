@@ -1,5 +1,5 @@
 import React from "react";
-import { ImSpinner9 } from "React-icons/im";
+import { ImSpinner9 } from "react-icons/im";
 
 const Loading = () => {
   return (
