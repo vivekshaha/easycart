@@ -49,28 +49,34 @@ function ProductList() {
 
   return (
     <>
-      <div className="grow">
-        <input
-          type="text"
-          value={query}
-          className="border-4 "
-          placeholder="enter you serch"
-          onChange={updatequery}
-        />
-        <select value={sort} onChange={updatesort}>
-          <option value="default">Default short</option>
-          <option value="priceasc">Price:Low to High</option>
-          <option value="pricedsc">Price:High to low</option>
-          <option value="title">shot by title</option>
-        </select>
-        <div className="grid grid-cols-3">
+      <div className="px-24 py-20 my-16 bg-white grow">
+        <div className="flex justify-end mb-8">
+          <input
+            className="w-56 p-2 ml-2 border border-black border-solid focus:outline-none"
+            type="text"
+            value={query}
+            placeholder="Search for the Product"
+            onChange={updatequery}
+          />
+          <select
+            value={sort}
+            onChange={updatesort}
+            className="w-56 p-2 ml-2 border border-black border-solid focus:outline-none"
+          >
+            <option value="default">Default sorting</option>
+            <option value="priceasc">Sort by price: Low to High</option>
+            <option value="pricedsc">Sort by price: High to Low</option>
+            <option value="title">Sort by Title</option>
+          </select>
+        </div>
+        <div className="grid grid-cols-3 gap-x-5 gap-y-9">
           {Products.map((product) => (
             <ProjectDetail key={product.id} {...product} />
           ))}
         </div>
         {Products.length == 0 && (
           <NoMatching>
-            Pls serch for another keyworid their is no matching
+            We we add the product shortly till look for the listed items
           </NoMatching>
         )}
       </div>

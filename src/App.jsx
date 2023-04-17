@@ -40,17 +40,18 @@ function App() {
 
   return (
     <>
-      {" "}
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-">
         <Navbar total={totalCount} />
-        <Routes>
-          <Route index element={<ProductList />} />
-          <Route
-            path="/products/:id"
-            element={<ProductDetail cartDetail={cartDetail} />}
-          />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="px-8 max-w-7xl bg-gray-light">
+          <Routes>
+            <Route index element={<ProductList />} />
+            <Route
+              path="/products/:id"
+              element={<ProductDetail cartDetail={cartDetail} />}
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
         <Footer />
       </div>
     </>
