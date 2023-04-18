@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ProjectDetail from "./Product";
 import { getProducts } from "./https";
 import NoMatching from "./NoMatching";
@@ -28,20 +28,22 @@ function ProductList() {
     console.log(sort);
   }
 
-  if (sort == "priceasc") {
-    Products.sort((a, b) => {
-      console.log("price as is claled");
-      return a.price - b.price;
-    });
-  } else if (sort == "pricedsc") {
-    Products.sort((a, b) => {
-      return b.price - a.price;
-    });
-  } else if (sort == "title") {
-    Products.sort((a, b) => {
-      return a.title > b.title ? 1 : -1;
-    });
-  }
+  useMemo(() => {
+    if (sort == "priceasc") {
+      Products.sort((a, b) => {
+        console.log("price as is claled");
+        return a.price - b.price;
+      });
+    } else if (sort == "pricedsc") {
+      Products.sort((a, b) => {
+        return b.price - a.price;
+      });
+    } else if (sort == "title") {
+      Products.sort((a, b) => {
+        return a.title > b.title ? 1 : -1;
+      });
+    }
+  }, [sort]);
 
   if (loading) {
     return <Loading />;
