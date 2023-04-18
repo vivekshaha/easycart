@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { getProductDetail } from "./https";
 import NotFound from "./NotFound";
 import Loading from "./Loading";
-import { BiArrowBack } from "react-icons/bi";
+import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
 
 const ProductDetail = ({ cartDetail }) => {
   const id = +useParams().id;
@@ -50,7 +50,7 @@ const ProductDetail = ({ cartDetail }) => {
         <>
           <div className="px-24 py-20 my-16 bg-white">
             <Link to="/" className="">
-              <BiArrowBack className="text-2xl text-primary" />
+              <BsArrowLeft className="text-2xl text-primary" />
             </Link>
             <div className="flex mt-4">
               <img
@@ -68,17 +68,20 @@ const ProductDetail = ({ cartDetail }) => {
                   type="number"
                   value={count}
                   onChange={handlecount}
-                  className="w-20 border-2 rounded-md"
+                  className="w-10 py-2 border focus:outline-none"
                 />
                 {count > 0 && (
                   <button
-                    className="px-2 bg-red-400 rounded-md"
+                    className="px-10 py-2 ml-4 font-bold text-white bg-red-400 rounded-md bg-primary"
                     onClick={addCart}
                   >
                     Add To Cart
                   </button>
                 )}
-
+              </div>
+            </div>
+            <div className="flex justify-between">
+              <div>
                 {id > 1 && (
                   <Link
                     to={"/products/" + (id - 1)}
@@ -86,14 +89,18 @@ const ProductDetail = ({ cartDetail }) => {
                       setLoading(true);
                     }}
                   >
-                    back
+                    <BsArrowLeft className="text-2xl text-primary" />
+                    Previous
                   </Link>
                 )}
+              </div>
+              <div>
                 <Link
                   to={"/products/" + (id + 1)}
                   onClick={() => setCount(true)}
                 >
-                  forward
+                  <BsArrowRight className="text-2xl text-primary" />
+                  Next
                 </Link>
               </div>
             </div>
