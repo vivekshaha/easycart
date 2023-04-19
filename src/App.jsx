@@ -8,6 +8,9 @@ import { Route, Routes, useParams } from "react-router-dom";
 import ProductDetail from "./ProductDetail";
 import NotFound from "./NotFound";
 import { getProductDetail } from "./https";
+import Login from "./Login";
+import SignUp from "./SignUp";
+import ForgetPass from "./ForgetPass";
 
 function App() {
   const localdata = localStorage.getItem("cart");
@@ -35,16 +38,20 @@ function App() {
   const cartData = Promise.all(promises);
   //ti is todo higherer
   cartData.then((a) => {
-    console.log(a);
+    // console.log(a);
   });
 
   return (
     <>
       <div className="flex flex-col ">
         <Navbar total={totalCount} />
-        <div className="px-8 max-w-7xl bg-gray-light grow">
+        {/* <Login /> */}
+        <div className="px-8 max-w-7xl bg-gray-dark grow">
           <Routes>
             <Route index element={<ProductList />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/forgetpass" element={<ForgetPass />} />
             <Route
               path="/products/:id"
               element={<ProductDetail cartDetail={cartDetail} />}
