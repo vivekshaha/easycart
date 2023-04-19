@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 
 const Footer = () => {
-  console.log("footer is rerunning");
+  // console.log("footer is rerunning");
   return (
     <div className="flex-0">
       <div className="flex justify-between py-9 px-9 bg-gray-dark ">
