@@ -1,7 +1,8 @@
 import React from "react";
-import { useFormik } from "formik";
+import { Form, Formik, useFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
+import Input from "./Input";
 
 const SignUp = () => {
   const schema = Yup.object({
@@ -21,88 +22,54 @@ const SignUp = () => {
       values.fullname
     );
   }
-  const {
-    values,
-    handleChange,
-    handleSubmit,
-    handleReset,
-    errors,
-    touched,
-    handleBlur,
-  } = useFormik({
-    initialValues: {
-      fullname: "",
-      email: "",
-      password: "",
-    },
-    validationSchema: schema,
-    onSubmit: sign,
-  });
 
+  const initialValues = {
+    fullname: "",
+    email: "",
+    password: "",
+  };
   return (
     <>
       <div>
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col items-center justify-center p-16 rounded-md bg-gray-light"
+        <Formik
+          validationSchema={schema}
+          initialValues={initialValues}
+          onSubmit={sign}
         >
-          <label htmlFor="fullname" className="sr-only">
-            Full Name
-          </label>
-          <input
-            type="text"
-            className="h-10 text-center border border-black w-72 rounded-t-md focus:outline-none"
-            name="fullname"
-            value={values.fullname}
-            placeholder="Full Name"
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-          {touched.fullname && errors.fullname ? (
-            <div>{errors.fullname}</div>
-          ) : null}{" "}
-          <label htmlFor="email" className="sr-only">
-            Email
-          </label>
-          <input
-            type="email"
-            onBlur={handleBlur}
-            name="email"
-            className="h-10 text-center border border-black w-72 focus:outline-none"
-            value={values.email}
-            placeholder="Email"
-            onChange={handleChange}
-          />
-          {touched.email && errors.email ? <div>{errors.email}</div> : null}{" "}
-          <label htmlFor="password" className="sr-only">
-            Password
-          </label>
-          <input
-            onBlur={handleBlur}
-            type="password"
-            name="password"
-            className="h-10 text-center border border-black w-72 rounded-b-md focus:outline-none"
-            value={values.password}
-            onChange={handleChange}
-            placeholder="Password"
-          />
-          {touched.password && errors.password ? (
-            <div>{errors.password}</div>
-          ) : null}{" "}
-          <button
-            className="px-8 py-3 bg-black rounded-md text-md text-primary"
-            type="submit"
-          >
-            Create Account
-          </button>
-          <button onClick={handleReset}>Reset Form</button>
-          <h1>
-            Already have an Account
-            <Link className="text-xl font-bold text-primary" to="/login">
-              Login{" "}
-            </Link>
-          </h1>
-        </form>
+          <Form className="flex flex-col items-center justify-center p-16 rounded-md bg-gray-light">
+            <Input
+              type="text"
+              className="h-10 text-center border border-black w-72 rounded-t-md focus:outline-none"
+              name="fullname"
+              placeholder="Full Name"
+            />
+            <Input
+              type="email"
+              name="email"
+              className="h-10 text-center border border-black w-72 focus:outline-none"
+              placeholder="Email"
+            />
+            <Input
+              type="password"
+              name="password"
+              className="h-10 text-center border border-black w-72 rounded-b-md focus:outline-none"
+              placeholder="Password"
+            />
+            <button
+              className="px-8 py-3 bg-black rounded-md text-md text-primary"
+              type="submit"
+            >
+              Create Account
+            </button>
+            {/* <button onClick={et}>Reset Form</button> */}
+            <h1>
+              Already have an Account
+              <Link className="text-xl font-bold text-primary" to="/login">
+                Login{" "}
+              </Link>
+            </h1>
+          </Form>
+        </Formik>
       </div>
     </>
   );
