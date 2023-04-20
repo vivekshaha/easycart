@@ -2,7 +2,6 @@ import { useState } from "react";
 import ProjectDetail from "./Product";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-
 import ProductList from "./ProductList";
 import { Route, Routes, useParams } from "react-router-dom";
 import ProductDetail from "./ProductDetail";
@@ -11,35 +10,29 @@ import { getProductDetail } from "./https";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import ForgetPass from "./ForgetPass";
+import Cart from "./Cart";
+import Hoctesting from "./Hoctesting";
 
 function App() {
   const localdata = localStorage.getItem("cart");
   const savedCart = JSON.parse(localdata) || {};
   const [cart, setCart] = useState(savedCart);
+
+  // Adding cart  detail in id and no format
   const cartDetail = (ProductId, count) => {
     // console.log("productId:", ProductId, "count:", count);
-    console.log("pid", ProductId);
     const oldCount = cart[ProductId] || 0;
-
     const newCart = { ...cart, [ProductId]: oldCount + +count };
     setCart(newCart);
     const savelocal = JSON.stringify(newCart);
     localStorage.setItem("cart", savelocal);
   };
-  // console.log(cart);
-  // console.log(Object.keys(cart));
 
+  console.log("app is called");
+  // Reading Total count
   const totalCount = Object.keys(cart).reduce((sum, Pid) => {
     return sum + cart[Pid];
   }, 0);
-  const promises = Object.keys(cart).map((a) => {
-    return getProductDetail(a);
-  });
-  const cartData = Promise.all(promises);
-  //ti is todo higherer
-  cartData.then((a) => {
-    // console.log(a);
-  });
 
   return (
     <>
@@ -49,6 +42,7 @@ function App() {
         <div className="px-8 max-w-7xl bg-gray-dark grow">
           <Routes>
             <Route index element={<ProductList />} />
+            <Route path="/cart" element={<Cart cart={cart} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/forgetpass" element={<ForgetPass />} />
@@ -56,6 +50,7 @@ function App() {
               path="/products/:id"
               element={<ProductDetail cartDetail={cartDetail} />}
             />
+            <Route path="/hoc" element={<Hoctesting />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
