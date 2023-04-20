@@ -1,7 +1,7 @@
 import React from "react";
 import FormikHOC from "./FormikHOC";
 
-const Input = ({ name, label, touched, className, error, ...rest }) => {
+const FancyInput = ({ name, label, touched, className, error, ...rest }) => {
   return (
     <div>
       <label htmlFor={label} className="sr-only">
@@ -11,7 +11,7 @@ const Input = ({ name, label, touched, className, error, ...rest }) => {
         {...rest}
         name={name}
         className={
-          "h-10 text-center border border-black w-72   focus:outline-none " +
+          "h-10 text-center focus:ring-primary border-6  placeholder:text-primary  w-72 bg-primary  focus:outline-none  " +
           className
         }
       />
@@ -19,6 +19,5 @@ const Input = ({ name, label, touched, className, error, ...rest }) => {
     </div>
   );
 };
-export const FormikInput = FormikHOC(Input);
-
-export default Input;
+export const FancyFormikInput = FormikHOC(FancyInput);
+export default FancyInput;

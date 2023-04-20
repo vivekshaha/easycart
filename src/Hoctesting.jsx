@@ -2,9 +2,12 @@ import React from "react";
 import { Form, Formik, useFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
+import Input from "./Input";
 import { FormikInput } from "./Input";
+import FancyInput from "./FancyInput";
+import { FancyFormikInput } from "./FancyInput";
 
-const SignUp = () => {
+const Hoctesting = () => {
   const schema = Yup.object({
     fullname: Yup.string()
       .max(15, "Must be 15 characters or less")
@@ -31,6 +34,17 @@ const SignUp = () => {
   return (
     <>
       <div>
+        <Input
+          type="text"
+          name="search"
+          placeholder="Enter you sech herer"
+          className="border focus:outline-none "
+        />
+        <FancyInput
+          type="text"
+          name="search"
+          placeholder="this is placehoder"
+        />
         <Formik
           validationSchema={schema}
           initialValues={initialValues}
@@ -39,20 +53,20 @@ const SignUp = () => {
           <Form className="flex flex-col items-center justify-center p-16 rounded-md bg-gray-light">
             <FormikInput
               type="text"
-              className="h-10 text-center border border-black w-72 rounded-t-md focus:outline-none"
+              className="rounded-t-md "
               name="fullname"
               placeholder="Full Name"
             />
             <FormikInput
               type="email"
               name="email"
-              className="h-10 text-center border border-black w-72 focus:outline-none"
+              className=""
               placeholder="Email"
             />
             <FormikInput
               type="password"
               name="password"
-              className="h-10 text-center border border-black w-72 rounded-b-md focus:outline-none"
+              className="rounded-b-md "
               placeholder="Password"
             />
             <button
@@ -75,4 +89,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Hoctesting;

@@ -11,6 +11,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import ForgetPass from "./ForgetPass";
 import Cart from "./Cart";
+import Hoctesting from "./Hoctesting";
 
 function App() {
   const localdata = localStorage.getItem("cart");
@@ -49,7 +50,7 @@ function App() {
               path="/products/:id"
               element={<ProductDetail cartDetail={cartDetail} />}
             />
-
+            <Route path="/hoc" element={<Hoctesting />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

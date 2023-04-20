@@ -3,6 +3,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import Input from "./Input";
+import { FormikInput } from "./Input";
+import FancyInput from "./FancyInput";
+import { FancyFormikInput } from "./FancyInput";
 
 const Login = () => {
   const schema = Yup.object({
@@ -29,7 +32,7 @@ const Login = () => {
         >
           <Form className="flex flex-col p-16 rounded-md bg-gray-light">
             <h1 className="p-5 text-3xl text-center">Login EasyCart</h1>
-            <Input
+            <FormikInput
               label="Enter You Email"
               type="text"
               name="email"
@@ -37,7 +40,7 @@ const Login = () => {
               placeholder="enter you email"
             />
 
-            <Input
+            <FormikInput
               label="My password"
               type="password"
               name="mpassword"
