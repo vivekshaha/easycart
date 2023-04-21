@@ -23,10 +23,13 @@ function App() {
     // console.log("productId:", ProductId, "count:", count);
     const oldCount = cart[ProductId] || 0;
     const newCart = { ...cart, [ProductId]: oldCount + +count };
-    setCart(newCart);
-    const savelocal = JSON.stringify(newCart);
-    localStorage.setItem("cart", savelocal);
+    updatecart(newCart);
   };
+  function updatecart(data) {
+    setCart(data);
+    const savelocal = JSON.stringify(data);
+    localStorage.setItem("cart", savelocal);
+  }
 
   console.log("app is called");
   // Reading Total count
@@ -42,7 +45,10 @@ function App() {
         <div className="px-8 max-w-7xl bg-gray-dark grow">
           <Routes>
             <Route index element={<ProductList />} />
-            <Route path="/cart" element={<Cart cart={cart} />} />
+            <Route
+              path="/cart"
+              element={<Cart cart={cart} updatecart={updatecart} />}
+            />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/forgetpass" element={<ForgetPass />} />
