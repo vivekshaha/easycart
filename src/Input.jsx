@@ -1,7 +1,7 @@
 import React from "react";
 import FormikHOC from "./FormikHOC";
 
-const Input = ({ name, label, touched, className, error, ...rest }) => {
+const Input = ({ id, name, label, touched, className, error, ...rest }) => {
   return (
     <div>
       <label htmlFor={label} className="sr-only">
