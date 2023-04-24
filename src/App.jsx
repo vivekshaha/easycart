@@ -11,7 +11,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import ForgetPass from "./ForgetPass";
 import Cart from "./Cartlist";
-import Hoctesting from "./Hoctesting";
+// import Hoctesting from "./Hoctesting";
 import CartPage from "./CartPage";
 
 function App() {
@@ -46,10 +46,10 @@ function App() {
         <div className="px-8 max-w-7xl bg-gray-dark grow">
           <Routes>
             <Route index element={<ProductList />} />
-            <Route
+            {/* <Route
               path="/cart1"
               element={<Cart cart={cart} updatecart={updatecart} />}
-            />
+            /> */}
             <Route
               path="/cart"
               element={<CartPage cart={cart} updatecart={updatecart} />}

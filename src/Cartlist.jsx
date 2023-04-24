@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CartItems from "./CartItems";
-import CartTotal from "./CartTotal";
-import { getProductDetail } from "./https";
-import Loading from "./Loading";
 
-const Cartlist = ({ cartitems, updatecart }) => {
-  const [localcart, setLocalcart] = useState([]);
-
-  function localupdatcart() {
-    updatecart(localcart);
-  }
-
+const Cartlist = ({ cartitems, localcart, setLocalcart, handleRemove }) => {
   return (
     <>
       <div className="px-24 py-20 my-16 text-black bg-white">
@@ -31,29 +22,15 @@ const Cartlist = ({ cartitems, updatecart }) => {
                   value={localcart[item.id]}
                   key={item.id}
                   id={item.id}
-                  cart={cart}
-                  updatecart={updatecart}
                   localcart={localcart}
                   setLocalcart={setLocalcart}
+                  handleRemove={handleRemove}
                 />
               );
             })
           ) : (
             <h1>khali hi tera cart</h1>
           )}
-
-          {cartitems.length !== 0 && (
-            <button
-              onClick={localupdatcart}
-              className="px-4 py-2 text-white rounded-md bg-primary"
-            >
-              update cart
-            </button>
-          )}
-        </div>
-        <div className="flex justify-end">
-          {" "}
-          <CartTotal />
         </div>
       </div>
     </>

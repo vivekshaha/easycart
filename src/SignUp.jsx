@@ -2,7 +2,6 @@ import React from "react";
 import { Form, Formik, useFormik, withFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import { FormikInput } from "./Input";
 import Input from "./Input";
 
 const schema = Yup.object({

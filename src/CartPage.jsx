@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import CartItems from "./CartItems";
 import CartTotal from "./CartTotal";
 import { getProductDetail } from "./https";
 import Loading from "./Loading";
@@ -9,7 +8,15 @@ const CartPage = ({ cart, updatecart }) => {
   const [localcart, setLocalcart] = useState([]);
   const [cartitems, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
+  function handleRemove(pid) {
+    // const id = +event.currentTarget.getAttribute("productid");
+
+    const newCart = { ...cart };
+    delete newCart[pid];
+    updatecart(newCart);
+  }
   useEffect(() => {
+    setLoading(true);
     const promises = Object.keys(cart).map((a) => {
       return getProductDetail(a);
     });
@@ -36,8 +43,9 @@ const CartPage = ({ cart, updatecart }) => {
         <div>
           <Cartlist
             cartitems={cartitems}
-            updatecart={updatecart}
-            localupdatcart={localupdatcart}
+            localcart={localcart}
+            setLocalcart={setLocalcart}
+            handleRemove={handleRemove}
           />
           (
           <button
