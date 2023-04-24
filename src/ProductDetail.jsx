@@ -21,7 +21,8 @@ const ProductDetail = ({ cartDetail }) => {
     setCount(1);
   }
   useEffect(() => {
-    setCount(1);
+    // setCount(1);
+    setLoading(true);
     const data = getProductDetail(id);
 
     data
@@ -83,22 +84,14 @@ const ProductDetail = ({ cartDetail }) => {
             <div className="flex justify-between">
               <div>
                 {id > 1 && (
-                  <Link
-                    to={"/products/" + (id - 1)}
-                    onClick={() => {
-                      setLoading(true);
-                    }}
-                  >
+                  <Link to={"/products/" + (id - 1)}>
                     <BsArrowLeft className="text-2xl text-primary" />
                     Previous
                   </Link>
                 )}
               </div>
               <div>
-                <Link
-                  to={"/products/" + (id + 1)}
-                  onClick={() => setCount(true)}
-                >
+                <Link to={"/products/" + (id + 1)}>
                   <BsArrowRight className="text-2xl text-primary" />
                   Next
                 </Link>

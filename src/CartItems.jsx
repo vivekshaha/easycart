@@ -7,30 +7,24 @@ const CartItems = ({
   price,
   value,
   id,
-  cart,
-  updatecart,
+
   localcart,
   setLocalcart,
+  handleRemove,
 }) => {
-  function handleRemove(event) {
-    const id = +event.currentTarget.getAttribute("productid");
-    const newCart = { ...cart };
-    delete newCart[id];
-    updatecart(newCart);
-  }
   // useEffect(() => {
   //   setLocalcart(cart);
   // }, [cart]);
   function handlechange(event) {
-    const pid = event.target.getAttribute("productid");
+    // const pid = event.target.getAttribute("productid");
     const newvalue = +event.target.value;
-    console.log(pid, newvalue);
-    const newlocalcart = { ...localcart, [pid]: newvalue };
+    console.log(id, newvalue);
+    const newlocalcart = { ...localcart, [id]: newvalue };
     setLocalcart(newlocalcart);
   }
   return (
     <div className="flex items-center justify-center border-b border-x border-primary">
-      <button productid={id} onClick={handleRemove}>
+      <button onClick={() => handleRemove(id)}>
         <AiTwotoneDelete className="w-20 text-2xl text-primary" />
       </button>
       <div className="w-32 p-2">
@@ -40,7 +34,7 @@ const CartItems = ({
       <h1 className="font-bold w-28">{price}</h1>
       <input
         type="number"
-        productid={id}
+        // productid={id}
         onChange={handlechange}
         className="w-16 font-bold mr-9"
         value={value}

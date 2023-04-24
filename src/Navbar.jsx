@@ -16,16 +16,18 @@ const Navbar = ({ total }) => {
         {bar && <div>Hamburger Icon is on</div>}
         <div>
           <Link to="/login">Login</Link>
-          <CiMenuBurger
+          {/* <CiMenuBurger
             className="text-xl cursor-pointer "
             onClick={() => {
               setBar(!bar);
             }}
-          />
+          /> */}
         </div>
         <div>
-          <BsBag className="cursor-pointer h-7 w-7 text-primary " />
-          <span className="absolute right-9 top-7 text-primary">{total}</span>
+          <Link to="/cart">
+            <BsBag className="cursor-pointer h-7 w-7 text-primary " />
+            <span className="absolute right-9 top-7 text-primary">{total}</span>
+          </Link>
         </div>
       </div>
     </div>
