@@ -4,16 +4,31 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import Input from "./Input";
 import { withFormik } from "formik";
+import { postlogin } from "./https";
+import { Navigate } from "react-router-dom";
 // import { FormikInput } from "./Input";
 
 const schema = Yup.object({
   email: Yup.string().email().required(),
   mpassword: Yup.string()
-    .min(6, "password should greater than 6 char")
+    .min(3, "password should greater than 6 char")
     .required(),
 });
-function sendingData(values) {
-  console.log("hello formik forms", values.email, values.mpassword);
+function sendingData(values, bag) {
+  // console.log("hello formik forms", values.email, values.mpassword);
+  // console.log();
+  postlogin(values.email, values.mpassword)
+    .then((data) => {
+      const { token, user } = data.data;
+      localStorage.setItem("token", token);
+      bag.props.setUser(user);
+      // console.log(token, user);
+      // console.log(JSON.stringify(data));
+      // console.log("Data", data);
+    })
+    .catch(() => {
+      console.log("data not found");
+    });
 }
 
 const initialValues = {
@@ -28,7 +43,6 @@ export const Login = ({
   handleBlur,
   handleSubmit,
 }) => {
-  console.log("vlaues in proes", values, errors);
   return (
     <>
       <div className="flex flex-col items-center justify-center h-screen bg-gray-dark ">
