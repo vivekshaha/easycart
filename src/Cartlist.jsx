@@ -4,27 +4,9 @@ import CartTotal from "./CartTotal";
 import { getProductDetail } from "./https";
 import Loading from "./Loading";
 
-const Cart = ({ cart, updatecart }) => {
+const Cartlist = ({ cartitems, updatecart }) => {
   const [localcart, setLocalcart] = useState([]);
-  const [cartitems, setCart] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const promises = Object.keys(cart).map((a) => {
-      return getProductDetail(a);
-    });
-    Promise.all(promises).then((products) => {
-      setCart(products);
-      setLoading(false);
-    });
-  }, [cart]);
 
-  useEffect(() => {
-    setLocalcart(cart);
-  }, [cart]);
-
-  if (loading) {
-    return <Loading />;
-  }
   function localupdatcart() {
     updatecart(localcart);
   }
@@ -78,4 +60,4 @@ const Cart = ({ cart, updatecart }) => {
   );
 };
 
-export default Cart;
+export default Cartlist;

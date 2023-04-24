@@ -12,7 +12,9 @@ const schema = Yup.object({
   password: Yup.string()
     .min(8, "Must be 8 characters or more")
     .required("Required"),
-  email: Yup.string().email("Invalid email address").required("Required"),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("email to bhar le yaar"),
 });
 function sign(values) {
   console.log(
@@ -97,7 +99,7 @@ const SignUp = ({
 };
 const myHOC = withFormik({
   validationSchema: schema,
-  onSubmit: sign,
+  handleSubmit: sign,
   initialValues: initialValues,
 });
 const easysignup = myHOC(SignUp);

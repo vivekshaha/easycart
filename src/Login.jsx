@@ -8,7 +8,9 @@ import { withFormik } from "formik";
 
 const schema = Yup.object({
   email: Yup.string().email().required(),
-  mpassword: Yup.string().min(6).required(),
+  mpassword: Yup.string()
+    .min(6, "password should greater than 6 char")
+    .required(),
 });
 function sendingData(values) {
   console.log("hello formik forms", values.email, values.mpassword);
@@ -63,7 +65,7 @@ export const Login = ({
             placeholder="Enter you passwords"
           />
 
-          <button type="submit">Log In</button>
+          <button type="submit">submit</button>
           <h1>
             Don't have an Account{" "}
             <Link className="text-xl font-bold text-primary" to="/signup">
@@ -85,7 +87,7 @@ export const Login = ({
 const myHOC = withFormik({
   validationSchema: schema,
   initialValues: initialValues,
-  onSubmit: sendingData,
+  handleSubmit: sendingData,
 });
 const EasyLogin = myHOC(Login);
 export default EasyLogin;
