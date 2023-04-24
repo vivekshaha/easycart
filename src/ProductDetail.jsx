@@ -73,7 +73,7 @@ const ProductDetail = ({ cartDetail }) => {
                 />
                 {count > 0 && (
                   <button
-                    className="px-10 py-2 ml-4 font-bold text-white bg-red-400 rounded-md bg-primary"
+                    className="px-10 py-2 ml-4 font-bold text-white rounded-md bg-primary"
                     onClick={addCart}
                   >
                     Add To Cart

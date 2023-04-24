@@ -3,6 +3,7 @@ import { Form, Formik, useFormik, withFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import Input from "./Input";
+import { postsignup } from "./https";
 
 const schema = Yup.object({
   fullname: Yup.string()
@@ -15,12 +16,19 @@ const schema = Yup.object({
     .email("Invalid email address")
     .required("email to bhar le yaar"),
 });
-function sign(values) {
-  console.log(
-    "calling of avlaues",
-    values.email,
-    values.password,
-    values.fullname
+function sign(values, bag) {
+  // console.log(
+  //   "calling of avlaues",
+  //   values.email,
+  //   values.password,
+  //   values.fullname
+  // );
+  postsignup(values.email, values.password, values.fullname).then(
+    (response) => {
+      const { user, token } = response.data;
+      bag.props.setUser(user);
+      localStorage.setItem("token", token);
+    }
   );
 }
 
