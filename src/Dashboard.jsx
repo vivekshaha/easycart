@@ -1,6 +1,11 @@
 import React from "react";
+// import { useContext } from "react";
+// import { UserContext } from "./App";
+import withUser from "./withUser";
 
 const Dashboard = ({ user, setUser }) => {
+  // const { user, setUser } = useContext(UserContext);
+
   const userlogout = () => {
     setUser(undefined);
     localStorage.removeItem("token");
@@ -13,4 +18,4 @@ const Dashboard = ({ user, setUser }) => {
   );
 };
 
-export default Dashboard;
+export default withUser(Dashboard);

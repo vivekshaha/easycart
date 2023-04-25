@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import Input from "./Input";
 import { postsignup } from "./https";
+import withUser from "./withUser";
 
 const schema = Yup.object({
   fullname: Yup.string()
@@ -110,4 +111,4 @@ const myHOC = withFormik({
   initialValues: initialValues,
 });
 const easysignup = myHOC(SignUp);
-export default easysignup;
+export default withUser(easysignup);
