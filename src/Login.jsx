@@ -6,6 +6,7 @@ import Input from "./Input";
 import { withFormik } from "formik";
 import { postlogin } from "./https";
 import { Navigate } from "react-router-dom";
+import withUser from "./withUser";
 // import { FormikInput } from "./Input";
 
 const schema = Yup.object({
@@ -104,4 +105,4 @@ const myHOC = withFormik({
   handleSubmit: sendingData,
 });
 const EasyLogin = myHOC(Login);
-export default EasyLogin;
+export default withUser(EasyLogin);
