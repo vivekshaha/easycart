@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import Input from "./Input";
 import { postsignup } from "./https";
 import withUser from "./withUser";
+import { withAlert } from "./withProvider";
 
 const schema = Yup.object({
   fullname: Yup.string()
@@ -24,13 +25,16 @@ function sign(values, bag) {
   //   values.password,
   //   values.fullname
   // );
-  postsignup(values.email, values.password, values.fullname).then(
-    (response) => {
+  postsignup(values.email, values.password, values.fullname)
+    .then((response) => {
       const { user, token } = response.data;
       bag.props.setUser(user);
       localStorage.setItem("token", token);
-    }
-  );
+    })
+    .catch(() => {
+      const data1 = { type: "error", message: "this user is alreay created" };
+      bag.props.setAlert(data1);
+    });
 }
 
 const initialValues = {
@@ -111,4 +115,4 @@ const myHOC = withFormik({
   initialValues: initialValues,
 });
 const easysignup = myHOC(SignUp);
-export default withUser(easysignup);
+export default withAlert(withUser(easysignup));

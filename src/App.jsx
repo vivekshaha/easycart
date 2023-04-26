@@ -15,26 +15,16 @@ import Dashboard from "./Dashboard";
 import Loading from "./Loading";
 import UserRoute from "./UserRoute";
 import AuthRoute from "./AuthRoute";
-export const UserContext = createContext();
+import Alert from "./Alert";
+import { AlertContext } from "./Context";
+import UserProvider from "./Provider/UserProvider";
+import AlertProvider from "./Provider/AlertProvider";
 
 function App() {
   const localdata = localStorage.getItem("cart");
   const savedCart = JSON.parse(localdata) || {};
   const [cart, setCart] = useState(savedCart);
-  const [user, setUser] = useState(undefined);
-  const [userloading, setUserloading] = useState(true);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      getuser(token).then((response) => {
-        setUser(response.data);
-        setUserloading(false);
-      });
-    } else {
-      setUserloading(false);
-    }
-  }, []);
+  // const [userloading, setUserloading] = useState(true);
 
   // Adding cart  detail in id and no format
   const cartDetail = (ProductId, count) => {
@@ -54,80 +44,83 @@ function App() {
   const totalCount = Object.keys(cart).reduce((sum, Pid) => {
     return sum + cart[Pid];
   }, 0);
-  if (userloading) {
-    <Loading />;
-  }
+  // if (userloading) {
+  //   <Loading />;
+  // }
 
   return (
     <>
       <div className="flex flex-col ">
-        <UserContext.Provider value={{ user, setUser }}>
-          <Navbar total={totalCount} />
-          {/* <Login /> */}
-          <div className="px-8 max-w-7xl bg-gray-dark grow">
-            <Routes>
-              <Route
-                index
-                element={
-                  <UserRoute>
-                    <ProductList />
-                  </UserRoute>
-                }
-              />
-              <Route
-                path="/cart"
-                element={
-                  <UserRoute>
-                    <CartPage cart={cart} updatecart={updatecart} />
-                  </UserRoute>
-                }
-              />
-              <Route
-                path="/dash"
-                element={
-                  <UserRoute>
-                    <Dashboard />
-                  </UserRoute>
-                }
-              />
-              <Route
-                path="/login"
-                element={
-                  <AuthRoute>
-                    <Login />
-                  </AuthRoute>
-                }
-              />
-              <Route
-                path="/signup"
-                element={
-                  <AuthRoute>
-                    <SignUp />
-                  </AuthRoute>
-                }
-              />
-              <Route
-                path="/forgetpass"
-                element={
-                  <AuthRoute>
-                    <ForgetPass />
-                  </AuthRoute>
-                }
-              />
-              <Route
-                path="/products/:id"
-                element={
-                  <UserRoute>
-                    <ProductDetail cartDetail={cartDetail} />
-                  </UserRoute>
-                }
-              />
-              {/* <Route path="/hoc" element={<Hoctesting />} /> */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-          <Footer />
-        </UserContext.Provider>
+        <AlertProvider>
+          <UserProvider>
+            <Navbar total={totalCount} />
+            <Alert />
+            {/* <Login /> */}
+            <div className="px-8 max-w-7xl bg-gray-dark grow">
+              <Routes>
+                <Route
+                  index
+                  element={
+                    <UserRoute>
+                      <ProductList />
+                    </UserRoute>
+                  }
+                />
+                <Route
+                  path="/cart"
+                  element={
+                    <UserRoute>
+                      <CartPage cart={cart} updatecart={updatecart} />
+                    </UserRoute>
+                  }
+                />
+                <Route
+                  path="/dash"
+                  element={
+                    <UserRoute>
+                      <Dashboard />
+                    </UserRoute>
+                  }
+                />
+                <Route
+                  path="/login"
+                  element={
+                    <AuthRoute>
+                      <Login />
+                    </AuthRoute>
+                  }
+                />
+                <Route
+                  path="/signup"
+                  element={
+                    <AuthRoute>
+                      <SignUp />
+                    </AuthRoute>
+                  }
+                />
+                <Route
+                  path="/forgetpass"
+                  element={
+                    <AuthRoute>
+                      <ForgetPass />
+                    </AuthRoute>
+                  }
+                />
+                <Route
+                  path="/products/:id"
+                  element={
+                    <UserRoute>
+                      <ProductDetail cartDetail={cartDetail} />
+                    </UserRoute>
+                  }
+                />
+                {/* <Route path="/hoc" element={<Hoctesting />} /> */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+            <Footer />
+          </UserProvider>
+        </AlertProvider>
       </div>
     </>
   );
