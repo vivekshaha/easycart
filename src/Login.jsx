@@ -5,8 +5,8 @@ import * as Yup from "yup";
 import Input from "./Input";
 import { withFormik } from "formik";
 import { postlogin } from "./https";
-import { Navigate } from "react-router-dom";
-import withUser from "./withUser";
+import { withUser } from "./withProvider";
+import { withAlert } from "./withProvider";
 // import { FormikInput } from "./Input";
 
 const schema = Yup.object({
@@ -19,15 +19,25 @@ function sendingData(values, bag) {
   // console.log("hello formik forms", values.email, values.mpassword);
   // console.log();
   postlogin(values.email, values.mpassword)
-    .then((data) => {
-      const { token, user } = data.data;
+    .then((response) => {
+      const { token, user } = response.data;
       localStorage.setItem("token", token);
       bag.props.setUser(user);
+      const data1 = {
+        type: "sucess",
+        message: "your data is coredts",
+      };
+      bag.props.setAlert(data1);
       // console.log(token, user);
       // console.log(JSON.stringify(data));
       // console.log("Data", data);
     })
     .catch(() => {
+      const data = {
+        type: "error",
+        message: "invalid creds",
+      };
+      bag.props.setAlert(data);
       console.log("data not found");
     });
 }
@@ -105,4 +115,4 @@ const myHOC = withFormik({
   handleSubmit: sendingData,
 });
 const EasyLogin = myHOC(Login);
-export default withUser(EasyLogin);
+export default withAlert(withUser(EasyLogin));

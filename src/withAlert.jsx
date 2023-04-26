@@ -1,14 +1,14 @@
 import React from "react";
 import { useContext } from "react";
-import { UserContext } from "./Context";
+import { AlertContext } from "./Context";
 
-const withUser = (IncomingComponent) => {
+const withAlert = (IncomingComponent) => {
   const OutgoingComponent = (props) => {
-    const ContextData = useContext(UserContext);
+    const ContextData = useContext(AlertContext);
     // console.log(props);
     return <IncomingComponent {...props} {...ContextData} />;
   };
   return OutgoingComponent;
 };
 
-export default withUser;
+export default withAlert;
