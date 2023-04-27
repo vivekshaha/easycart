@@ -4,8 +4,8 @@ import { getuser } from "../https";
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(undefined);
+  const token = localStorage.getItem("token");
   useEffect(() => {
-    const token = localStorage.getItem("token");
     if (token) {
       getuser(token)
         .then((response) => {
@@ -21,7 +21,7 @@ const UserProvider = ({ children }) => {
     // }
   }, []);
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ isLoggedIn: !!token, user, setUser }}>
       {children}
     </UserContext.Provider>
   );

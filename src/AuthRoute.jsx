@@ -8,7 +8,7 @@ const AuthRoute = ({ user, children }) => {
   // const { user } = useContext(UserContext);
 
   if (user) {
-    return <Navigate to="/dash" />;
+    return <Navigate to="/" />;
   }
   return children;
 };

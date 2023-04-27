@@ -7,20 +7,17 @@ const CartItems = ({
   price,
   value,
   id,
+  handlechange,
 
-  localcart,
-  setLocalcart,
   handleRemove,
 }) => {
   // useEffect(() => {
   //   setLocalcart(cart);
   // }, [cart]);
-  function handlechange(event) {
+  function handleq(event) {
     // const pid = event.target.getAttribute("productid");
     const newvalue = +event.target.value;
-    console.log(id, newvalue);
-    const newlocalcart = { ...localcart, [id]: newvalue };
-    setLocalcart(newlocalcart);
+    handlechange(id, newvalue);
   }
   return (
     <div className="flex items-center justify-center border-b border-x border-primary">
@@ -35,7 +32,7 @@ const CartItems = ({
       <input
         type="number"
         // productid={id}
-        onChange={handlechange}
+        onChange={handleq}
         className="w-16 font-bold mr-9"
         value={value}
       />

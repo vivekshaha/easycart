@@ -3,8 +3,9 @@ import logo from "./logo.svg";
 import { BsBag } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { CiMenuBurger } from "react-icons/ci";
+import { withCart } from "./withProvider";
 
-const Navbar = ({ total }) => {
+const Navbar = ({ totalCount }) => {
   const [bar, setBar] = useState(false);
 
   return (
@@ -26,7 +27,9 @@ const Navbar = ({ total }) => {
         <div>
           <Link to="/cart">
             <BsBag className="cursor-pointer h-7 w-7 text-primary " />
-            <span className="absolute right-9 top-7 text-primary">{total}</span>
+            <span className="absolute right-9 top-7 text-primary">
+              {totalCount}
+            </span>
           </Link>
         </div>
       </div>
@@ -34,4 +37,4 @@ const Navbar = ({ total }) => {
   );
 };
 
-export default Navbar;
+export default withCart(Navbar);

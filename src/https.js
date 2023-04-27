@@ -26,7 +26,7 @@ export function getProducts(sortBy, page, search, sortType) {
 }
 export function getProductDetail(id) {
   return axios
-    .get("https://myeasykart.codeyogi.io/products/" + id)
+    .get("https://myeasykart.codeyogi.io/product/" + id)
     .then((data) => {
       return data.data;
     });
@@ -65,4 +65,39 @@ export function getuser(token) {
       // console.log(response);
       return response;
     });
+}
+
+export function getProductbyId(ids) {
+  const commaSepratedIds = ids.join();
+  return axios
+    .get("https://myeasykart.codeyogi.io/products/bulk", {
+      params: {
+        ids: commaSepratedIds,
+      },
+    })
+    .then((response) => response.data);
+}
+
+export function saveCart(cart) {
+  console.log("savecart api is calles");
+  return axios
+    .post(
+      "https://myeasykart.codeyogi.io/carts",
+      { data: cart },
+      {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      }
+    )
+    .then((response) => response.data);
+}
+export function getCart() {
+  return axios
+    .get("https://myeasykart.codeyogi.io/carts", {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+    .then((response) => response.data);
 }

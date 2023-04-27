@@ -4,8 +4,9 @@ import { getProductDetail } from "./https";
 import NotFound from "./NotFound";
 import Loading from "./Loading";
 import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
+import { withCart } from "./withProvider";
 
-const ProductDetail = ({ cartDetail }) => {
+const ProductDetail = ({ addToCart }) => {
   const id = +useParams().id;
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(1);
@@ -16,7 +17,7 @@ const ProductDetail = ({ cartDetail }) => {
   }
 
   function addCart() {
-    cartDetail(id, count);
+    addToCart(id, count);
 
     setCount(1);
   }
@@ -106,4 +107,4 @@ const ProductDetail = ({ cartDetail }) => {
   );
 };
 
-export default ProductDetail;
+export default withCart(ProductDetail);
