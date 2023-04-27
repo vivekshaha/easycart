@@ -1,7 +1,7 @@
 import React from "react";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { GrStatusGood } from "react-icons/gr";
-import withAlert from "./withAlert";
+import withAlert from "./removedcom/withAlert";
 import { useEffect } from "react";
 const themeMap = {
   sucess: {

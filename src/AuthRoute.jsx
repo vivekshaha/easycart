@@ -2,7 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 // import { UserContext } from "./App";
-import withUser from "./withUser";
+import withUser from "./removedcom/withUser";
 
 const AuthRoute = ({ user, children }) => {
   // const { user } = useContext(UserContext);

@@ -1,6 +1,6 @@
 import { useField } from "formik";
 import React from "react";
-import Input from "./Input";
+import Input from "../Input";
 import FancyInput from "./FancyInput";
 
 const FancyFormikInput = ({ name, label, ...rest }) => {
