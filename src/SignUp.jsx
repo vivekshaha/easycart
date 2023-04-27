@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import Input from "./Input";
 import { postsignup } from "./https";
-import withUser from "./withUser";
+import { withUser } from "./withProvider";
 import { withAlert } from "./withProvider";
 
 const schema = Yup.object({
@@ -50,7 +50,6 @@ const SignUp = ({
   handleBlur,
   handleSubmit,
 }) => {
-  console.log(values);
   return (
     <>
       <div>

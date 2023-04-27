@@ -1,15 +1,35 @@
 import axios from "axios";
 // import { allData } from "./API";
 
-export function getProducts() {
-  return axios.get("https://dummyjson.com/products").then((response) => {
-    return response.data.products;
-  });
+export function getProducts(sortBy, page, search, sortType) {
+  let params = {};
+  if (sortBy) {
+    params.sortBy = sortBy;
+  }
+  if (page) {
+    params.page = page;
+  }
+  if (search) {
+    params.search = search;
+  }
+  if (sortType) {
+    params.sortType = sortType;
+  }
+  return axios
+    .get("https://myeasykart.codeyogi.io/products", {
+      params,
+    })
+    .then((response) => {
+      console.log(response);
+      return response.data;
+    });
 }
 export function getProductDetail(id) {
-  return axios.get("https://dummyjson.com/products/" + id).then((data) => {
-    return data.data;
-  });
+  return axios
+    .get("https://myeasykart.codeyogi.io/products/" + id)
+    .then((data) => {
+      return data.data;
+    });
 }
 export function postlogin(email, password) {
   return axios

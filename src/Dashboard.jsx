@@ -1,7 +1,7 @@
 import React from "react";
 // import { useContext } from "react";
 // import { UserContext } from "./App";
-import withUser from "./withUser";
+import { withUser } from "./withProvider";
 
 const Dashboard = ({ user, setUser }) => {
   // const { user, setUser } = useContext(UserContext);
